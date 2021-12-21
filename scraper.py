@@ -148,7 +148,24 @@ def scr():
             
             except:
                 print('sorry no data found')
+                
+        elif 'who is' in query:
+            try:
+                URL = 'https://www.google.com/search?q='+query
 
+                headers = {
+                'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36'
+                }
+
+                page = requests.get(URL, headers=headers)
+                soup = BeautifulSoup(page.content, 'html.parser')
+                
+                headings = soup.find(class_='FLP8od').get_text()
+                
+                print('\nAnswer: \n',headings)
+            
+            except:
+                print('sorry no data found')
 
         elif '0' in query or 'back' in query:
             start()
